@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">APIsample</string>
+
+    <string name="weather">天気</string>
+    <string name="sendAPI">API送信</string>
+    <string name="weatherImage">天気の画像</string>
+    <string name="pokemonId">図鑑番号</string>
+</resources>
