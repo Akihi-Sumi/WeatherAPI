@@ -1,5 +1,6 @@
 package com.example.apisample.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -57,10 +58,10 @@ data class Weather(
 
         @Serializable
         data class ChanceOfRain(
-            val T00_06: String?,
-            val T06_12: String?,
-            val T12_18: String?,
-            val T18_24: String?,
+            @SerialName("T00_06") val t0006: String?,
+            @SerialName("T06_12") val t0612: String?,
+            @SerialName("T12_18") val t1218: String?,
+            @SerialName("T18_24") val t1824: String?,
         )
 
         @Serializable
