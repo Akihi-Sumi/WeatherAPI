@@ -40,11 +40,14 @@ android {
 }
 
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:4.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     implementation("com.pixplicity.sharp:sharp:1.1.3") {
         exclude(module = "unspecified")
     }
+
+    implementation("io.coil-kt:coil:2.5.0")
+    implementation("io.coil-kt:coil-svg:2.5.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

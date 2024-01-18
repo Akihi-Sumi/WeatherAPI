@@ -1,3 +1,5 @@
 package com.example.apisample
 
-data class Weather(val weatherTitle: String?)
+import coil.request.Disposable
+
+data class Weather(val weatherImage: Disposable?,val weatherTitle: String?)
