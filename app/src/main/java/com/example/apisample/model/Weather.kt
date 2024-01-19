@@ -51,7 +51,7 @@ data class Weather(
 
             @Serializable
             data class TemperatureItem(
-                val celsius: Float?,
+                val celsius: String?,
                 val fahrenheit: Float?,
             )
         }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.apisample.databinding.ActivityMainBinding
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var weatherList: ArrayList<com.example.apisample.Weather>
+    private lateinit var weatherList: ArrayList<WeatherCardData>
     private lateinit var weatherAdapter: WeatherAdapter
 
     private val client = OkHttpClient.Builder()
@@ -33,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
+        setHorizontalWeatherViewAdapter()
 
         binding.button.setOnClickListener {
-            setHorizontalWeatherViewAdapter()
+
             setWeathersDataToUI()
         }
     }
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
 
-        // addDummyDataToList()
+        addDummyDataToList()
 
         weatherAdapter = WeatherAdapter(weatherList)
         binding.recycleView.adapter = weatherAdapter
@@ -79,27 +78,34 @@ class MainActivity : AppCompatActivity() {
                 val weather = Json.decodeFromString<Weather>(responseBody)
 
                 for (i in 0 .. 2) {
-                    val eachDaysWeather = weather.forecasts?.get(i)?.telop
-                    val eachDaysImageSrc = weather.forecasts?.get(i)?.image?.url
+                    val dateLabel = weather.forecasts?.get(i)?.dateLabel
+                    val detailWeather = weather.forecasts?.get(i)?.detail?.weather
+                    val imageUrl = weather.forecasts?.get(i)?.image?.url
+                    val maxTemperature = weather.forecasts?.get(i)?.temperature?.max?.celsius
+                    val minTemperature = weather.forecasts?.get(i)?.temperature?.min?.celsius
+                    val detailWind = weather.forecasts?.get(i)?.detail?.wind
 
-                    val eachWeatherData = com.example.apisample.Weather(
-                        eachDaysImageSrc,
-                        eachDaysWeather,
+                    val eachWeatherData = WeatherCardData(
+                        dateLabel,
+                        detailWeather,
+                        imageUrl,
+                        maxTemperature,
+                        minTemperature,
+                        detailWind
                     )
 
-                    weatherList.add(eachWeatherData)
+                    weatherList[i] = eachWeatherData
 
-                    val adapter = recyclerView.adapter
-                    adapter?.notifyItemChanged(i)
+                    weatherAdapter.notifyItemChanged(i)
 
                 }
             }
         }.start()
     }
 
-//    private fun addDummyDataToList() {
-//        weatherList.add(Weather("https://www.jma.go.jp/bosai/forecast/img/100.svg", "晴れ"))
-//        weatherList.add(Weather("https://www.jma.go.jp/bosai/forecast/img/200.svg", "曇り"))
-//        weatherList.add(Weather("https://www.jma.go.jp/bosai/forecast/img/300.svg", "雨"))
-//    }
+    private fun addDummyDataToList() {
+        weatherList.add(WeatherCardData("今日", "晴れ", "https://www.jma.go.jp/bosai/forecast/img/100.svg", "20", "10", "西風"))
+        weatherList.add(WeatherCardData("明日", "曇り", "https://www.jma.go.jp/bosai/forecast/img/200.svg", "10", "0", "南の風　やや強く"))
+        weatherList.add(WeatherCardData("明後日", "雨", "https://www.jma.go.jp/bosai/forecast/img/300.svg", "0", "-10", "北西の風　海上では　やや強く"))
+    }
 }

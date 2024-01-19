@@ -5,4 +5,12 @@
     <string name="sendAPI">API送信</string>
     <string name="weatherImage">天気の画像</string>
     <string name="pokemonId">図鑑番号</string>
+    <string name="dayText">今日</string>
+    <string name="weatherText">晴のち曇り</string>
+    <string name="weatherDescription">weatherIcon</string>
+    <string name="maxTemp">20</string>
+    <string name="maxCel">℃</string>
+    <string name="minTemp">0</string>
+    <string name="minCel">℃</string>
+    <string name="windText">北西の風　後　北の風</string>
 </resources>
