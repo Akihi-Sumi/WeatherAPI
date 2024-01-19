@@ -23,7 +23,7 @@ class WeatherAdapter(private val weatherList: List<Weather>) :
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val weather = weatherList[position]
-        holder.weatherImageView.load("https://www.jma.go.jp/bosai/forecast/img/100.svg") {
+        holder.weatherImageView.load(weather.weatherImage) {
             decoderFactory { result, options, _ -> SvgDecoder(result.source, options) }
         }
         holder.weatherTitle.text = weather.weatherTitle
